@@ -60,20 +60,21 @@ namespace RevealSdk.Server.Reveal
             // You can set query properties based on the incoming requests
             // ****
 
-            //
-            //
-            // add some code to bypass this if it is an excel data source
-            //
-            //
 
-
+            // ****
+            // Bypass this if it is an excel data source, this is for demo / sample purposes
+            // ****
             if (dataSourceItem is not RVPostgresDataSourceItem sqlDsi) return Task.FromResult(dataSourceItem);
 
-            // Ensure data source is updated
+
+            // Ensure data source is updated if it is a Postgres datasource
             ChangeDataSourceAsync(userContext, sqlDsi.DataSource);
 
             string customerId = userContext.UserId;
 
+            // ****
+            // This role is set in the UserContext, check the Role for Admin or User
+            // ****
             bool isAdmin = userContext.Properties["Role"]?.ToString() == "Admin";
 
             var allowedTables = TableInfo.GetAllowedTables()
@@ -81,31 +82,31 @@ namespace RevealSdk.Server.Reveal
                              .Select(t => t.TABLE_NAME)
                              .ToList();
 
-            switch (sqlDsi.Id)
+            switch (sqlDsi.Id.ToLower())
             {
                 // *****
                 // Example of how to use a stored procedure with a parameter
                 // *****
-                case "CustOrderHist":
-                case "CustOrders":
-                case "CustOrderDates":
+                case "custorderhist":
+                case "custorders":
+                case "custordersdates":
                     if (!IsValidCustomerId(customerId))
                         throw new ArgumentException("Invalid CustomerID format. CustomerID must be a 5-character alphanumeric string.");
-                    sqlDsi.FunctionName = sqlDsi.Id;
-                    sqlDsi.FunctionParameters = new Dictionary<string, object> { { "@customer_id", customerId } };
+                    sqlDsi.FunctionName = sqlDsi.Id.ToLower();
+                    sqlDsi.FunctionParameters = new Dictionary<string, object> { { "customer_id", customerId } };
                     break;
 
                 // *****
                 // Example of how to use a stored procedure 
                 // *****
-                case "TenMostExpensiveProducts":
+                case "tenmostexpensiveproducts":
                     sqlDsi.FunctionName = "ten most expensive products";
                     break;
 
                 // *****
                 // Example of an ad-hoc-query
                 // *****
-                case "CustomerOrders":
+                case "customerorders":
                     string orderId = userContext.Properties["OrderId"]?.ToString();
 
                     if (!IsValidOrderId(orderId))
@@ -128,6 +129,10 @@ namespace RevealSdk.Server.Reveal
                     // the tables being checked are in the allowedtables.json
                     // *****
                  case var table when allowedTables.Contains(sqlDsi.Table):
+
+                    // ****
+                    // If the role is Admin, don't do the ad-hoc query / filter, just use the Table data w/ no paramterized query
+                    // ****
                     if (isAdmin)
                         break;
 
@@ -160,7 +165,6 @@ namespace RevealSdk.Server.Reveal
         // specific to this sample code.  For example, ensuring the customerId & orderId are well formed, 
         // and ensuring that no invalid / illegal statements are passed in the header to the custom query
         // ****
-
         private static bool IsValidCustomerId(string customerId) => Regex.IsMatch(customerId, @"^[A-Za-z0-9]{5}$");
         private static bool IsValidOrderId(string orderId) => Regex.IsMatch(orderId, @"^\d{5}$");
         private string EscapeSqlInput(string input) => input.Replace("'", "''");

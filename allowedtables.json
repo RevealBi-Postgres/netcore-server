@@ -1,66 +1,66 @@
 [
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "All Orders",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Quarterly Orders",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "All Invoices",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Customers",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Orders",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "OrderDetailsEmployee",
-    "COLUMN_NAME": "CustomerID"
+    "COLUMN_NAME": "customerid"
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Shippers",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Employees",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Products",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Region",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Suppliers",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Categories",
     "COLUMN_NAME": ""
   },
   {
-    "TABLE_SCHEMA": "dbo",
+    "TABLE_SCHEMA": "public",
     "TABLE_NAME": "Territories",
     "COLUMN_NAME": ""
   }
